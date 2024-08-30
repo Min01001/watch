@@ -131,3 +131,7 @@ body {
 .cards{
   margin: 10px;
 }
+
+.color-bg{
+  background-color: rgb(26, 22, 22);
+}

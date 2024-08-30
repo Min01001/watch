@@ -38,25 +38,68 @@ $result = $conn->query($sql);
 </div>
 <!-- ================== search bar end =================================== -->
 
+<?php
+include '../main/db_connect.php';
+
+// Check if 'id' is present in the query string
+if (isset($_GET['id']) && !empty($_GET['id'])) {
+    $id = intval($_GET['id']); // Get the product ID from the URL
+
+    // Fetch image from the database
+    $stmt = $conn->prepare("SELECT image FROM products WHERE id = ?");
+    $stmt->bind_param('i', $id);
+    $stmt->execute();
+    $stmt->bind_result($image);
+    $stmt->fetch();
+
+    if ($image) {
+        // Set the content type header based on the image type
+        header("Content-Type: image/jpeg"); // Adjust MIME type if necessary
+        echo $image;
+    } else {
+        // Handle the case where the image is not found
+        header("HTTP/1.0 404 Not Found");
+        echo "Image not found.";
+    }
+
+    $stmt->close();
+} else {
+    // Handle the case where 'id' is not provided
+    header("HTTP/1.0 400 Bad Request");
+    echo "Product ID not specified.";
+}
+?>
+
+
 <!-- Product List -->
 <div class="container-fluid">
     <div class="row justify-content-center" id="product-list" style="padding-top: 60px;">
         <?php
+        // Fetch products from the database
+        $sql = "SELECT * FROM products";
+        $result = $conn->query($sql);
+
         if ($result->num_rows > 0) {
             // Output data for each product
             while ($product = $result->fetch_assoc()) {
+                // Sanitize image URL and other data
+                $imageUrl = htmlspecialchars($product['image'], ENT_QUOTES, 'UTF-8');
+                $itemName = htmlspecialchars($product['item'], ENT_QUOTES, 'UTF-8');
+                $itemPrice = number_format($product['price']);
+                $productId = htmlspecialchars($product['id'], ENT_QUOTES, 'UTF-8');
+
                 echo '<div class="col-6 col-sm-4 col-md-3 col-lg-2">';
                 echo '    <div class="card cards">';
-                echo '        <div class="d-flex justify-content-center align-items-center" style="height: 200px;">';
-                echo '            <img src="' . $product['image'] . '" class="card-img-top img-fluid img-center" alt="' . $product['item'] . '">';
+                echo '        <div class="d-flex justify-content-center align-items-center">';
+                echo '            <img style="width: 150px; height: 150px;" src="get_image.php?id=' . $productId . '" class="card-img-top img-fluid img-center" alt="' . $itemName . '">';
                 echo '        </div>';
                 echo '        <div class="card-body">';
-                echo '            <h5 class="card-text text-center">' . $product['item'] . '</h5>';
-                echo '            <p class="card-text text-center"><strong>' . number_format($product['price']) . ' KS</strong></p>';
+                echo '            <h5 class="card-text text-center">' . $itemName . '</h5>';
+                echo '            <p class="card-text text-center"><strong>' . $itemPrice . ' KS</strong></p>';
                 echo '        </div>';
                 echo '        <div class="d-flex justify-content-center">';
                 echo '            <form method="POST" onsubmit="return confirm(\'Are you sure you want to delete?\')" action="delete.php">';
-                echo '                <input type="hidden" name="id" value="' . $product['id'] . '">';
+                echo '                <input type="hidden" name="id" value="' . $productId . '">';
                 echo '                <button type="submit" class="btn btn-danger btn-sm">Delete</button>';
                 echo '            </form>';
                 echo '        </div>';
@@ -76,7 +119,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Function to fetch and display products
     function fetchProducts() {
-        const searchQuery = searchInput.value;
+        const searchQuery = searchInput.value.trim();
         fetch('search_product.php?search_query=' + encodeURIComponent(searchQuery))
             .then(response => response.json())
             .then(data => displayProducts(data))
@@ -85,14 +128,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function displayProducts(products) {
         const container = document.getElementById('product-list');
-        container.innerHTML = ''; // Clear the container
+        container.innerHTML = '';
 
         if (products.length > 0) {
             products.forEach(product => {
                 const productHtml = `
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2">
                         <div class="card cards">
-                            <img src="${product.image}" class="card-img-top img-fluid" alt="${product.item}">
+<img style="width: 150px; height: 150px;" src="get_image.php?id=<?php echo $productId; ?>" class="card-img-top img-fluid img-center" alt="<?php echo $itemName; ?>">
                             <div class="card-body">
                                 <p class="card-title text-center text-dark">${product.item}</p>
                                 <p class="card-text text-center text-dark">${product.price} KS</p>
@@ -108,17 +151,19 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Event listener for search input
-    searchInput.addEventListener('keyup', function() {
+    searchInput.addEventListener('input', function() {
         fetchProducts(); // Fetch products when search input changes
     });
 
     // Fetch products every 1 second (1000 milliseconds)
-    setInterval(fetchProducts, 1000);
+    // Commenting this out to avoid excessive server requests
+    // setInterval(fetchProducts, 1000);
 
     // Initial fetch
     fetchProducts();
 });
 </script>
+
 
 
 

@@ -1,6 +1,6 @@
 <section class="ftco-section">
   <div class="container" style="padding-top: 20px;">
-    <nav class="navbar navbar-expand-lg ftco_navbar ftco-navbar-light" id="ftco-navbar">
+    <nav class="navbar navbar-expand-lg ftco_navbar color-bg" id="ftco-navbar">
       <div class="container-fluid custom-navbar">
         <a class="navbar-brand" href="#">Watch Store</a>			  
         <div>
@@ -16,7 +16,7 @@
         </div>
 
         <div>
-          <p><strong>Phone</strong><span> 09 777 444 222</span> <br> <strong>Facebook</strong><span> Account name</span> </p>
+          <p class="text-white"><strong>Phone</strong><span> 09 777 444 222</span> <br> <strong>Facebook</strong><span> Account name</span> </p>
         </div>
       </div>
     </nav>

@@ -1,34 +1,35 @@
 <?php
-include '../main/db_connect.php'; // Adjust the path as needed
+include '../main/db_connect.php';
 
-// Retrieve the search query from the request
-$search_query = isset($_GET['search_query']) ? $conn->real_escape_string($_GET['search_query']) : '';
+// Get the search query from the request
+$search_query = isset($_GET['search_query']) ? $_GET['search_query'] : '';
 
-// SQL query to search for products
-$sql = "SELECT * FROM products WHERE item LIKE '%$search_query%'";
+// Prepare the SQL query to search for products
+$sql = "SELECT * FROM products WHERE item LIKE ?";
 
-// Execute the query
-$result = $conn->query($sql);
+// Prepare and execute the statement
+$stmt = $conn->prepare($sql);
+$search_param = "%" . $search_query . "%";
+$stmt->bind_param('s', $search_param);
+$stmt->execute();
+$result = $stmt->get_result();
 
-// Prepare an array to store products
+// Fetch the results
 $products = [];
-
-if ($result->num_rows > 0) {
-    // Fetch the data and populate the array
-    while ($row = $result->fetch_assoc()) {
-        $products[] = [
-            'id' => $row['id'],
-            'image' => $row['image'],
-            'item' => $row['item'],
-            'price' => $row['price']
-        ];
-    }
+while ($row = $result->fetch_assoc()) {
+    $products[] = [
+        'id' => $row['id'],
+        'item' => htmlspecialchars($row['item'], ENT_QUOTES, 'UTF-8'),
+        'price' => number_format($row['price']),
+        'image' => 'get_image.php?id=' . $row['id'] // Adjust if image URL handling is different
+    ];
 }
 
-// Set the content type to JSON and return the data
+// Return the results as JSON
 header('Content-Type: application/json');
 echo json_encode($products);
 
-// Close the database connection
+// Close the statement and connection
+$stmt->close();
 $conn->close();
 ?>
