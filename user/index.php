@@ -15,7 +15,14 @@
 </head>
 <body>
 
-<?php include '../main/sidebar.php'; ?>
+<?php
+include '../main/sidebar.php';
+include '../main/db_connect.php';
+
+// Fetch products (initial load)
+$sql = "SELECT * FROM products"; // Ensure this matches your actual query
+$result = $conn->query($sql);
+?>
 
 <!-- ================== search bar start =================================== -->
 <div class="container-fluid search-btn d-flex justify-content-center align-items-center">
@@ -29,75 +36,80 @@
         </button>
     </form>
 </div>
-
 <!-- ================== search bar end =================================== -->
 
 <!-- Product List -->
- 
 <div class="container-fluid">
     <div class="row justify-content-center" id="product-list" style="padding-top: 60px;">
-        <!-- Product cards will be dynamically injected here -->
+        <?php
+        if ($result->num_rows > 0) {
+            // Output data for each product
+            while ($product = $result->fetch_assoc()) {
+                echo '<div class="col-6 col-sm-4 col-md-3 col-lg-2">';
+                echo '    <div class="card cards">';
+                echo '        <div class="d-flex justify-content-center align-items-center" style="height: 200px;">';
+                echo '            <img src="' . $product['image'] . '" class="card-img-top img-fluid img-center" alt="' . $product['item'] . '">';
+                echo '        </div>';
+                echo '        <div class="card-body">';
+                echo '            <h5 class="card-text text-center">' . $product['item'] . '</h5>';
+                echo '            <p class="card-text text-center"><strong>' . number_format($product['price']) . ' KS</strong></p>';
+                echo '        </div>';
+                echo '        <div class="d-flex justify-content-center">';
+                echo '            <form method="POST" onsubmit="return confirm(\'Are you sure you want to delete?\')" action="delete.php">';
+                echo '                <input type="hidden" name="id" value="' . $product['id'] . '">';
+                echo '                <button type="submit" class="btn btn-danger btn-sm">Delete</button>';
+                echo '            </form>';
+                echo '        </div>';
+                echo '    </div>';
+                echo '</div>';
+            }
+        } else {
+            echo '<p>No products found</p>';
+        }
+        ?>
     </div>
 </div>
 
-<!-- ================== Script for Search and Auto Refresh ================== -->
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
 <script>
-$(document).ready(function() {
-    let allProducts = [];
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('search-input');
 
     // Function to fetch and display products
     function fetchProducts() {
-        $.getJSON('search_product.php')
-            .done(function(data) {
-                allProducts = data;
-                displayProducts(allProducts); // Display all products
-            })
-            .fail(function(jqXHR, textStatus, errorThrown) {
-                console.error('Error fetching products:', textStatus, errorThrown);
-                $('#product-list').html('<p>An error occurred while fetching products.</p>');
-            });
+        const searchQuery = searchInput.value;
+        fetch('search_product.php?search_query=' + encodeURIComponent(searchQuery))
+            .then(response => response.json())
+            .then(data => displayProducts(data))
+            .catch(error => console.error('Error:', error));
     }
 
-    // Function to display products dynamically
     function displayProducts(products) {
-        const productList = $('#product-list');
-        productList.empty(); // Clear the product list before updating
+        const container = document.getElementById('product-list');
+        container.innerHTML = ''; // Clear the container
 
         if (products.length > 0) {
             products.forEach(product => {
-                productList.append(`
+                const productHtml = `
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2">
                         <div class="card cards">
-                            <div class="d-flex justify-content-center align-items-center" style="height: 200px;">
-                                <img src="${product.image}" class="card-img-top img-fluid img-center" alt="${product.item}">
-                            </div>
+                            <img src="${product.image}" class="card-img-top img-fluid" alt="${product.item}">
                             <div class="card-body">
-                                <h5 class="card-text text-center">${product.item}</h5>
-                                <p class="card-text text-center"><strong>${parseInt(product.price).toLocaleString()} KS</strong></p>
+                                <p class="card-title text-center text-dark">${product.item}</p>
+                                <p class="card-text text-center text-dark">${product.price} KS</p>
                             </div>
                         </div>
                     </div>
-                `);
+                `;
+                container.insertAdjacentHTML('beforeend', productHtml);
             });
         } else {
-            productList.append('<p>No products found.</p>');
+            container.innerHTML = '<p class="text-white">No products found.</p>';
         }
     }
 
-    // Search function triggered by typing in the search bar
-    $('#search-input').on('input', function() {
-        const searchText = $(this).val().toLowerCase();
-
-        // Filter the products based on search input
-        const filteredProducts = allProducts.filter(product =>
-            product.item.toLowerCase().includes(searchText)
-        );
-
-        // Display the filtered products
-        displayProducts(filteredProducts);
+    // Event listener for search input
+    searchInput.addEventListener('keyup', function() {
+        fetchProducts(); // Fetch products when search input changes
     });
 
     // Fetch products every 1 second (1000 milliseconds)
@@ -107,6 +119,7 @@ $(document).ready(function() {
     fetchProducts();
 });
 </script>
+
 
 
 
