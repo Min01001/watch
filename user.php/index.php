@@ -9,13 +9,15 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 	<link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../main/style.css">
 	
 
 </head>
 <body>
 
-<?php include 'sidebar.php';?>
+<?php include '../main/sidebar.php';
+
+    ?>
 
 <!-- ================== search bar start =================================== -->
 <div class="container-fluid search-btn d-flex justify-content-center align-items-center">
