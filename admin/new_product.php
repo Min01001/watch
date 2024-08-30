@@ -83,6 +83,14 @@
         }
         ?>
 
+        <div class="container-fluid" style="padding-top: 15px;">
+            
+            <div class="d-flex justify-content-end">
+                <a href="view_product.php"><button class="btn btn-primary"style="width: 150px; height: 40px;">View</button></a>
+            </div>
+            
+        </div>
+
 	  <div class="container-fluid top-size">
 
         <form class="row" method="POST" enctype="multipart/form-data" onsubmit="return confirm('Are you sure you want to add')" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
