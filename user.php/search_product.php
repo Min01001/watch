@@ -1,5 +1,5 @@
 <?php
-include 'db_connect.php';
+include '../main/db_connect.php';
 
 // Fetch all product data
 $sql = "SELECT item, price, note, image FROM products";

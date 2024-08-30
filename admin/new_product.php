@@ -26,7 +26,7 @@
 
 
             // Handle file upload
-            $target_dir = "uploads/"; // Make sure this directory exists and is writable
+            $target_dir = "../uploads/"; // Make sure this directory exists and is writable
             $target_file = $target_dir . basename($_FILES["image"]["name"]);
             $uploadOk = 1;
             $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
@@ -121,6 +121,6 @@
   
 
     <!-- Custom JS -->
-    <script src="script.js"></script>
+    <script src="../main/script.js"></script>
 </body>
 </html>

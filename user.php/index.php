@@ -15,15 +15,13 @@
 </head>
 <body>
 
-<?php include '../main/sidebar.php';
-
-    ?>
+<?php include '../main/sidebar.php'; ?>
 
 <!-- ================== search bar start =================================== -->
 <div class="container-fluid search-btn d-flex justify-content-center align-items-center">
-    <form class="d-flex w-50" role="search" style="padding-top: 50px;">
+    <form class="d-flex w-50" role="search" style="padding-top: 50px;" onsubmit="return false;">
         <input id="search-input" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-dark d-flex align-items-center" type="button">
+        <button id="search-button" class="btn btn-outline-dark d-flex align-items-center" type="button">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="blue" class="bi bi-search" viewBox="0 0 16 16">
                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
             </svg>
@@ -42,7 +40,7 @@
     </div>
 </div>
 
-<!-- ================== Script for Search functionality ================== -->
+<!-- ================== Script for Search and Auto Refresh ================== -->
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -50,11 +48,18 @@
 $(document).ready(function() {
     let allProducts = [];
 
-    // Fetch all products via AJAX and store in allProducts
-    $.getJSON('search_product.php', function(data) {
-        allProducts = data;
-        displayProducts(allProducts); // Display all products initially
-    });
+    // Function to fetch and display products
+    function fetchProducts() {
+        $.getJSON('search_product.php')
+            .done(function(data) {
+                allProducts = data;
+                displayProducts(allProducts); // Display all products
+            })
+            .fail(function(jqXHR, textStatus, errorThrown) {
+                console.error('Error fetching products:', textStatus, errorThrown);
+                $('#product-list').html('<p>An error occurred while fetching products.</p>');
+            });
+    }
 
     // Function to display products dynamically
     function displayProducts(products) {
@@ -94,8 +99,16 @@ $(document).ready(function() {
         // Display the filtered products
         displayProducts(filteredProducts);
     });
+
+    // Fetch products every 1 second (1000 milliseconds)
+    setInterval(fetchProducts, 1000);
+
+    // Initial fetch
+    fetchProducts();
 });
 </script>
+
+
 
   
 	  <!-- Include jQuery, Popper.js, and Bootstrap JS -->
@@ -110,6 +123,6 @@ $(document).ready(function() {
   
 
     <!-- Custom JS -->
-    <script src="script.js"></script>
+    <script src="../main/script.js"></script>
 </body>
 </html>
