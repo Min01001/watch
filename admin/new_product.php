@@ -3,17 +3,24 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>New Product</title>
+	<title>new_product</title>
 	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="../main/style.css">
+	
+
 </head>
 <body>
 
+
+
 <?php 
+
 include '../main/sidebar.php'; 
 include '../main/db_connect.php'; 
+
+
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_FILES["image"]) && $_FILES["image"]["error"] == 0) {
@@ -122,12 +129,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </form>
 </div>
 
-<!-- Include jQuery, Popper.js, and Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  
+	  <!-- Include jQuery, Popper.js, and Bootstrap JS -->
+	  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-<!-- Custom JS -->
-<script src="../main/script.js"></script>
+
+  
+
+    <!-- Custom JS -->
+    <script src="../main/script.js"></script>
 </body>
 </html>

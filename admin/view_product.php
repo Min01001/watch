@@ -63,10 +63,7 @@ if ($result->num_rows > 0) {
         echo '            <p class="card-text text-center"><strong>' . number_format($product['price']) . ' KS</strong></p>';
         echo '        </div>';
         echo '        <div class="d-flex justify-content-center">';
-        echo '            <form method="POST" onsubmit="return confirm(\'Are you sure you want to delete?\')" action="delete.php">';
-        echo '                <input type="hidden" name="id" value="' . $product['id'] . '">';
-        echo '                <button type="submit" class="btn btn-danger btn-sm">Delete</button>';
-        echo '            </form>';
+        
         echo '        </div>';
         echo '    </div>';
         echo '</div>';
