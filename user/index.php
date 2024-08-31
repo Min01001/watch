@@ -8,132 +8,106 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 	<link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
 
     <link rel="stylesheet" href="../main/style.css">
+ 
 	
 
 </head>
+
+<style>
+body{
+    background-color: black;
+}
+
+.bg-holder {
+    background-image: url('../assets/header-bg.png');
+    background-position: right top;
+    background-size: contain; /* Adjust size as needed */
+    background-repeat: no-repeat;
+    height: 500px; /* Adjust height as needed */
+    width: 100%; /* Ensures it spans the full width */
+
+    
+}
+
+.second-image {
+    background-image: url('../assets/store-bg.png');
+    background-position: left top;
+    background-size: contain; /* Adjust size as needed */
+    background-repeat: no-repeat;
+    height: 500px; /* Adjust height as needed */
+    width: 100%; /* Ensures it spans the full width */
+
+
+    
+}
+
+
+h3{
+    font-size: 70px;
+    color: white;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+h2{
+    font-size: 30px;
+    color: white;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.btn-outline-light {
+            border-color: white;
+            color: white;
+            background-color: transparent;
+            border-radius: 4px;
+            padding: 8px 16px;
+        }
+
+        .btn-outline-light:hover {
+            background-color: white;
+            color: black;
+        }
+
+</style>
+
 <body>
 
-<?php
-include '../main/sidebar.php';
-include '../main/db_connect.php';
-
-// Fetch products (initial load)
-$sql = "SELECT * FROM products"; // Ensure this matches your actual query
-$result = $conn->query($sql);
-?>
-
-<!-- Search Bar -->
-<div class="container-fluid search-btn d-flex justify-content-center align-items-center">
-    <form class="d-flex w-50" role="search" style="padding-top: 50px;" onsubmit="return false;">
-        <input id="search-input" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <!-- <button id="search-button" class="btn btn-outline-dark d-flex align-items-center" type="button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="blue" class="bi bi-search" viewBox="0 0 16 16">
-                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-            </svg>
-            <span class="ms-2 text-dark">Search</span>
-        </button> -->
-    </form>
-</div>
-
-<!-- Product List -->
-<div class="container-fluid">
-    <div class="row justify-content-center" id="product-list" style="padding-top: 60px;">
         <?php
-        if ($result->num_rows > 0) {
-            while ($product = $result->fetch_assoc()) {
-                echo '<div class="col-6 col-sm-4 col-md-3 col-lg-2">';
-                echo '    <div class="card cards">';
-                echo '        <div class="d-flex justify-content-center align-items-center" style="height: 200px;">';
+        include '../main/sidebar.php';
 
-                // If image is stored as a file path, display it
-                if (!empty($product['image'])) {
-                    echo '            <img src="' . $product['image'] . '" class="card-img-top img-fluid img-center" alt="' . $product['item'] . '">';
-                } else {
-                    echo '            <img src="../path/to/default-image.jpg" class="card-img-top img-fluid img-center" alt="No Image">';
-                }
 
-                echo '        </div>';
-                echo '        <div class="card-body">';
-                echo '            <h5 class="card-text text-center">' . $product['item'] . '</h5>';
-                echo '            <p class="card-text text-center"><strong>' . number_format($product['price']) . ' KS</strong></p>';
-                echo '        </div>';
-                echo '        <div class="d-flex justify-content-center">';
-                echo '            <form method="POST" onsubmit="return confirm(\'Are you sure you want to delete?\')" action="delete.php">';
-                echo '                <input type="hidden" name="id" value="' . $product['id'] . '">';
-                echo '                <button type="submit" class="btn btn-danger btn-sm">Delete</button>';
-                echo '            </form>';
-                echo '        </div>';
-                echo '    </div>';
-                echo '</div>';
-            }
-        } else {
-            echo '<p>No products found</p>';
-        }
+        // Fetch products (initial load)
+
         ?>
+
+    <div class="container-fluid">
+        <section>
+            <div class="bg-holder"></div>
+        </section>
+        <div class="position-relative" style="top: -480px; left: 50px;">
+            <h3>CUSTOM WATCHES <br> FOR ANY <br> OCCASION</h3>
+            <div class="d-flex justify-content-start mt-3">
+                <button class="btn btn-outline-light">DESIGN & ORDER</button>
+                <button class="btn btn-outline-light ms-3 mx-3">DESIGN & ORDER</button>
+            </div>
+        </div>
     </div>
-</div>
 
-<?php
-$conn->close(); // Close the database connection
-?>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const searchInput = document.getElementById('search-input');
-    let typingTimer;
-    const doneTypingInterval = 1000; // Time in milliseconds (1 second)
-
-    // Function to fetch and display products based on search input
-    function fetchProducts() {
-        const searchQuery = searchInput.value.trim();
-        fetch('search_product.php?search_query=' + encodeURIComponent(searchQuery))
-            .then(response => response.json())
-            .then(data => displayProducts(data))
-            .catch(error => console.error('Error:', error));
-    }
-
-    // Function to display the products
-    function displayProducts(products) {
-        const container = document.getElementById('product-list');
-        container.innerHTML = ''; // Clear existing products
-
-        if (products.length > 0) {
-            products.forEach(product => {
-                const productHtml = `
-                    <div class="col-6 col-sm-4 col-md-3 col-lg-2">
-                        <div class="card cards">
-                            <img src="${product.image}" class="card-img-top img-fluid" style="width: 150px; height: 150px;" alt="${product.item}">
-                            <div class="card-body">
-                                <p class="card-title text-center text-dark">${product.item}</p>
-                                <p class="card-text text-center text-dark">${product.price} KS</p>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                container.insertAdjacentHTML('beforeend', productHtml);
-            });
-        } else {
-            container.innerHTML = '<p class="text-dark">No products found.</p>';
-        }
-    }
-
-    // Event listener for search input with a 1-second delay
-    searchInput.addEventListener('input', function() {
-        clearTimeout(typingTimer);
-        typingTimer = setTimeout(fetchProducts, doneTypingInterval); // 1-second delay after user stops typing
-    });
-
-    // Automatically fetch products every 1 second
-    setInterval(fetchProducts, 1000);
-
-    // Initial fetch to load products on page load
-    fetchProducts();
-});
+    <div class="container-fluid">
+        <section>
+            <div class="second-image"></div>
+        </section>
+        <div class="position-relative" style="top: -480px; left: 50px;">
+            <h2>CUSTOM WATCHES <br> FOR ANY <br> OCCASION</h2>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laboriosam dolore eaque libero, autem modi labore eum atque ipsum at delectus quibusdam suscipit, soluta ipsam nostrum quasi sunt recusandae architecto nobis?</p>
+        </div>
+    </div>
 
 
-</script>
+
 
   
 	  <!-- Include jQuery, Popper.js, and Bootstrap JS -->
