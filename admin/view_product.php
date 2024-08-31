@@ -20,7 +20,7 @@
 <body>
 
 <?php
-include '../main/sidebar.php';
+include 'sidebar.php';
 include '../main/db_connect.php';
 
 // Correct SQL query
