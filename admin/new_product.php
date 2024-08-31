@@ -3,13 +3,11 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>new_product</title>
+	<title>New Product</title>
 	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="../main/style.css">
-	
-
 </head>
 <body>
 
@@ -23,33 +21,44 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $price = $_POST['price'];
         $note = $_POST['note'];
         
-        // Process file upload
+        // File properties
         $imageFile = $_FILES["image"];
+        $fileSize = $imageFile["size"];
+        $fileType = pathinfo($imageFile["name"], PATHINFO_EXTENSION);
         $uploadDirectory = '../uploads/';
         $imagePath = $uploadDirectory . basename($imageFile["name"]);
         
-        // Ensure the uploads directory exists and is writable
+        // Validate file size (2MB limit)
+        if ($fileSize > 2 * 1024 * 1024) {
+            die("File size exceeds 2MB limit.");
+        }
+        
+        // Validate file type
+        $allowedTypes = ['jpg', 'jpeg', 'png'];
+        if (!in_array(strtolower($fileType), $allowedTypes)) {
+            die("Only JPG, JPEG, and PNG files are allowed.");
+        }
+
+        // Ensure upload directory exists
         if (!is_dir($uploadDirectory)) {
             if (!mkdir($uploadDirectory, 0755, true)) {
                 die('Failed to create upload directory.');
             }
         }
 
+        // Move the uploaded file to the server
         if (move_uploaded_file($imageFile["tmp_name"], $imagePath)) {
-            // Create an image resource from the uploaded file
+            // Compress and save the image
             $imgResource = imagecreatefromstring(file_get_contents($imagePath));
         
             if ($imgResource !== false) {
-                // Set initial quality (this can be adjusted)
-                $quality = 75;
-        
-                // Output buffer to hold the compressed image data
+                $quality = 75; // Set initial quality
                 ob_start();
                 imagejpeg($imgResource, null, $quality);
                 $imgContent = ob_get_contents();
                 ob_end_clean();
         
-                // Keep reducing quality until the file size is below 15 KiB
+                // Reduce quality until the file is under 15 KiB
                 while (strlen($imgContent) > 15 * 1024 && $quality > 10) {
                     $quality -= 5;
                     ob_start();
@@ -58,19 +67,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     ob_end_clean();
                 }
         
-                // Free up memory
                 imagedestroy($imgResource);
-        
-                // Escape the content to store in the database
-                $imgContent = addslashes($imgContent);
-        
-                // Insert the product into the database
+
+                // Save the image path in the database
                 $stmt = $conn->prepare("INSERT INTO products (item, price, note, image) VALUES (?, ?, ?, ?)");
-                $stmt->bind_param('ssss', $item, $price, $note, $imgContent);
+                $stmt->bind_param('ssss', $item, $price, $note, $imagePath);
                 
                 if ($stmt->execute()) {
-                    echo "Product added successfully.";
-                    echo "<script>window.location.href='new_product.php'</script>";
+                    echo "<script>alert('Product added successfully.'); window.location.href='new_product.php'</script>";
                 } else {
                     echo "Error inserting data: " . $stmt->error;
                 }
@@ -80,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 echo "Failed to process image.";
             }
         } else {
-            echo "Failed to upload image. Error: " . error_get_last()['message'];
+            echo "Failed to upload image.";
         }
     } else {
         echo "File upload error. Error code: " . $_FILES["image"]["error"];
@@ -118,17 +122,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </form>
 </div>
 
+<!-- Include jQuery, Popper.js, and Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-  
-	  <!-- Include jQuery, Popper.js, and Bootstrap JS -->
-	  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-	  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-
-  
-
-    <!-- Custom JS -->
-    <script src="../main/script.js"></script>
+<!-- Custom JS -->
+<script src="../main/script.js"></script>
 </body>
 </html>
