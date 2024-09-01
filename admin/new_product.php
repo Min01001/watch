@@ -20,78 +20,56 @@
 include 'sidebar.php'; 
 include '../main/db_connect.php'; 
 
-
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_FILES["image"]) && $_FILES["image"]["error"] == 0) {
         $item = $_POST['item'];
         $price = $_POST['price'];
         $note = $_POST['note'];
-        
-        // File properties
-        $imageFile = $_FILES["image"];
-        $fileSize = $imageFile["size"];
-        $fileType = pathinfo($imageFile["name"], PATHINFO_EXTENSION);
-        $uploadDirectory = '../uploads/';
-        $imagePath = $uploadDirectory . basename($imageFile["name"]);
-        
-        // Validate file size (2MB limit)
-        if ($fileSize > 2 * 1024 * 1024) {
-            die("File size exceeds 2MB limit.");
-        }
-        
-        // Validate file type
-        $allowedTypes = ['jpg', 'jpeg', 'png'];
-        if (!in_array(strtolower($fileType), $allowedTypes)) {
-            die("Only JPG, JPEG, and PNG files are allowed.");
-        }
 
-        // Ensure upload directory exists
-        if (!is_dir($uploadDirectory)) {
-            if (!mkdir($uploadDirectory, 0755, true)) {
-                die('Failed to create upload directory.');
-            }
-        }
-
-        // Move the uploaded file to the server
-        if (move_uploaded_file($imageFile["tmp_name"], $imagePath)) {
-            // Compress and save the image
-            $imgResource = imagecreatefromstring(file_get_contents($imagePath));
+        // Read the uploaded file content
+        $imageContent = file_get_contents($_FILES["image"]["tmp_name"]);
         
-            if ($imgResource !== false) {
-                $quality = 75; // Set initial quality
+        // Create an image resource from the uploaded file content
+        $imgResource = imagecreatefromstring($imageContent);
+        
+        if ($imgResource !== false) {
+            // Set initial quality
+            $quality = 75;
+
+            // Output buffer to hold the compressed image data
+            ob_start();
+            imagejpeg($imgResource, null, $quality);
+            $imgContent = ob_get_contents();
+            ob_end_clean();
+            
+            // Keep reducing quality until the file size is below 15 KiB
+            while (strlen($imgContent) > 15 * 1024 && $quality > 10) {
+                $quality -= 5;
                 ob_start();
                 imagejpeg($imgResource, null, $quality);
                 $imgContent = ob_get_contents();
                 ob_end_clean();
-        
-                // Reduce quality until the file is under 15 KiB
-                while (strlen($imgContent) > 15 * 1024 && $quality > 10) {
-                    $quality -= 5;
-                    ob_start();
-                    imagejpeg($imgResource, null, $quality);
-                    $imgContent = ob_get_contents();
-                    ob_end_clean();
-                }
-        
-                imagedestroy($imgResource);
-
-                // Save the image path in the database
-                $stmt = $conn->prepare("INSERT INTO products (item, price, note, image) VALUES (?, ?, ?, ?)");
-                $stmt->bind_param('ssss', $item, $price, $note, $imagePath);
-                
-                if ($stmt->execute()) {
-                    echo "<script>alert('Product added successfully.'); window.location.href='new_product.php'</script>";
-                } else {
-                    echo "Error inserting data: " . $stmt->error;
-                }
-                
-                $stmt->close();
-            } else {
-                echo "Failed to process image.";
             }
+            
+            imagedestroy($imgResource);
+
+            // Convert the image content to a base64 data URL
+            $base64 = base64_encode($imgContent);
+            $dataUrl = 'data:image/jpeg;base64,' . $base64;
+
+            // Save the base64 data URL in the database
+            $stmt = $conn->prepare("INSERT INTO products (item, price, note, image) VALUES (?, ?, ?, ?)");
+            $stmt->bind_param('ssss', $item, $price, $note, $dataUrl);
+            
+            if ($stmt->execute()) {
+                echo "<script>alert('Product added successfully.'); window.location.href='new_product.php'</script>";
+            } else {
+                echo "Error inserting data: " . $stmt->error;
+            }
+            
+            $stmt->close();
         } else {
-            echo "Failed to upload image.";
+            echo "Failed to process image.";
         }
     } else {
         echo "File upload error. Error code: " . $_FILES["image"]["error"];

@@ -120,7 +120,7 @@
                           <div class="col-sm-6 col-md-4 mb-3 mb-md-0">
                             <div class="card bg-black text-white p-6 pb-8"><img class="card-img" src="../assets/watch-1.png" alt="..." />
                               <div class="card-img-overlay bg-dark-gradient d-flex flex-column-reverse align-items-center">
-                                <h6 class="text-primary">$650.00</h6>
+                                <h6 class="text-primary">700000.00KS</h6>
                                 <h4 class="text-light">ADRIATICA ADR</h4>
                               </div><a class="stretched-link" href="#"></a>
                             </div>
@@ -128,7 +128,7 @@
                           <div class="col-sm-6 col-md-4 mb-3 mb-md-0">
                             <div class="card bg-black text-white p-6 pb-8"><img class="card-img" src="../assets/watch-2.png" alt="..." />
                               <div class="card-img-overlay bg-dark-gradient d-flex flex-column-reverse align-items-center">
-                                <h6 class="text-primary">$126.00</h6>
+                                <h6 class="text-primary">550000.00KS</h6>
                                 <h4 class="text-light">SEIKO SNZGO7K1</h4>
                               </div><a class="stretched-link" href="#"></a>
                             </div>
@@ -136,7 +136,7 @@
                           <div class="col-sm-6 col-md-4 mb-3 mb-md-0">
                             <div class="card bg-black text-white p-6 pb-8"><img class="card-img" src="../assets/watch-3.png" alt="..." />
                               <div class="card-img-overlay bg-dark-gradient d-flex flex-column-reverse align-items-center">
-                                <h6 class="text-primary">$250.00</h6>
+                                <h6 class="text-primary">500000.00KS</h6>
                                 <h4 class="text-light">ROAMER RM 220837</h4>
                               </div><a class="stretched-link" href="#"></a>
                             </div>
