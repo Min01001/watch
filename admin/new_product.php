@@ -11,7 +11,7 @@
 	
 
 </head>
-<body>
+<body style="background-color: black">
 
 
 
@@ -108,20 +108,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <div class="container-fluid top-size">
     <form class="row" method="POST" enctype="multipart/form-data" onsubmit="return confirm('Are you sure you want to add?')" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
         <div class="col-md-12">
-            <label for="item" class="form-label">Product</label>
+            <label for="item" class="form-label text-white">Product</label>
             <input type="text" class="form-control" id="item" name="item" required>
         </div>
         <div class="col-md-12">
-            <label for="price" class="form-label">Price</label>
+            <label for="price" class="form-label text-white">Price</label>
             <input type="text" class="form-control" id="price" name="price" required>
         </div>
         <div class="col-12">
-            <label for="note" class="form-label">Note</label>
+            <label for="note" class="form-label text-white">Note</label>
             <input type="text" class="form-control" id="note" name="note">
         </div>
         <div class="col-12">
-            <label for="image" class="form-label">Image</label>
-            <input type="file" class="form-control" id="image" name="image" required>
+            <label for="image" class="form-label text-white">Image</label>
+            <input type="file" class="form-control text-dark" id="image" name="image" required>
         </div>
         <div class="col-12 py-4 text-center">
             <button type="submit" class="btn btn-primary" style="width: 150px;">Add</button>

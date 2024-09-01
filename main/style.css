@@ -92,7 +92,7 @@ body {
   }
   
   /* Responsive Styles */
-  @media (max-width: 768px) {
+  @media (max-width: 700px) {
     .navbar-nav .nav-link {
       font-size: 0.9rem;
       padding: 8px 15px;
@@ -117,8 +117,8 @@ body {
 }
 
 .img-center {
-  width: 150px; /* Desired width */
-  height: 150px; /* Desired height */
+  width: 180px; /* Desired width */
+  height: 180px; /* Desired height */
   object-fit: cover; /* Maintain aspect ratio and cover container */
   
 }

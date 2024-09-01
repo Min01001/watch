@@ -1,127 +1,235 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>home</title>
-	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-	<link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<html lang="en-US" dir="ltr">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-    <link rel="stylesheet" href="../main/style.css">
- 
-	
-
-</head>
-
-<style>
-body{
-    background-color: black;
-}
-
-.bg-holder {
-    background-image: url('../assets/header-bg.png');
-    background-position: right top;
-    background-size: contain; /* Adjust size as needed */
-    background-repeat: no-repeat;
-    height: 500px; /* Adjust height as needed */
-    width: 100%; /* Ensures it spans the full width */
-
-    
-}
-
-.second-image {
-    background-image: url('../assets/store-bg.png');
-    background-position: left top;
-    background-size: contain; /* Adjust size as needed */
-    background-repeat: no-repeat;
-    height: 500px; /* Adjust height as needed */
-    width: 100%; /* Ensures it spans the full width */
+    <!-- ===============================================-->
+    <!--    Document Title-->
+    <!-- ===============================================-->
+    <title>watch | Landing, Ecommerce &amp; Business Templatee</title>
 
 
-    
-}
+    <!-- ===============================================-->
+    <!--    Favicons-->
+    <!-- ===============================================-->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicons/favicon-16x16.png">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicons/favicon.ico">
+    <link rel="manifest" href="assets/img/favicons/manifest.json">
+    <meta name="msapplication-TileImage" content="assets/img/favicons/mstile-150x150.png">
+    <meta name="theme-color" content="#ffffff">
 
 
-h3{
-    font-size: 70px;
-    color: white;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-}
-
-h2{
-    font-size: 30px;
-    color: white;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-}
-
-.btn-outline-light {
-            border-color: white;
-            color: white;
-            background-color: transparent;
-            border-radius: 4px;
-            padding: 8px 16px;
-        }
-
-        .btn-outline-light:hover {
-            background-color: white;
-            color: black;
-        }
-
-</style>
-
-<body>
-
-        <?php
-        include '../main/sidebar.php';
+    <!-- ===============================================-->
+    <!--    Stylesheets-->
+    <!-- ===============================================-->
+    <link rel="stylesheet" href="style.css">
+  </head>
 
 
-        // Fetch products (initial load)
+  <body>
 
-        ?>
+    <!-- ===============================================-->
+    <!--    Main Content-->
+    <!-- ===============================================-->
+    <main class="main" id="top">
 
-    <div class="container-fluid">
-        <section>
-            <div class="bg-holder"></div>
-        </section>
-        <div class="position-relative" style="top: -480px; left: 50px;">
-            <h3>CUSTOM WATCHES <br> FOR ANY <br> OCCASION</h3>
-            <div class="d-flex justify-content-start mt-3">
-                <button class="btn btn-outline-light">DESIGN & ORDER</button>
-                <button class="btn btn-outline-light ms-3 mx-3">DESIGN & ORDER</button>
+      <?php include 'sidebar.php'; ?>
+
+
+      <section class="py-0" id="header">
+        <div class="bg-holder" style="background-image:url(../assets/header-bg.png);background-position:right top;background-size:contain;">
+        </div>
+        <!--/.bg-holder-->
+
+        <div class="container">
+          <div class="row align-items-center min-vh-75 min-vh-xl-100">
+            <div class="col-md-8 col-lg-6 text-md-start text-center">
+              <h1 class="display-1 lh-sm text-uppercase text-light">Custom Watches For <br class="d-none d-xxl-block" /> Any Occasion</h1>
+              <div class="pt-4"><a class="btn btn-sm btn-outline-primary me-3" href="#">DESIGN &amp; ORDER</a><a class="btn btn-sm btn-outline-primary" href="#">REQUEST VIRTUAL</a></div>
             </div>
+          </div>
         </div>
-    </div>
-
-    <div class="container-fluid">
-        <section>
-            <div class="second-image"></div>
-        </section>
-        <div class="position-relative" style="top: -480px; left: 50px;">
-            <h2>CUSTOM WATCHES <br> FOR ANY <br> OCCASION</h2>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laboriosam dolore eaque libero, autem modi labore eum atque ipsum at delectus quibusdam suscipit, soluta ipsam nostrum quasi sunt recusandae architecto nobis?</p>
+      </section>
+      <section class="bg-black py-8 pt-0" id="store">
+        <div class="bg-holder" style="background-image:url(../assets/store-bg.png);background-position:left bottom;background-size:contain;">
         </div>
-    </div>
+        <!--/.bg-holder-->
+
+        <div class="container-lg">
+          <div class="row flex-center">
+            <div class="col-6 order-md-0 text-center text-md-start"></div>
+            <div class="col-sm-10 col-md-6 col-lg-6 text-center text-md-start">
+              <div class="col-4 position-relative ms-auto py-5"><a class="carousel-control-prev carousel-icon z-index-2" href="#carouselExampleFade" role="button" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Previous</span></a><a class="carousel-control-next carousel-icon z-index-2" href="#carouselExampleFade" role="button" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Next</span></a></div>
+              <div class="carousel slide carousel-fade" id="carouselExampleFade" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <div class="row h-100">
+                      <div class="col-12">
+                        <h5 class="fs-3 fs-lg-5 lh-sm text-uppercase">Our store</h5>
+                        <p class="my-4 pe-xl-5">Memphis clinched a spot in the play-in tournament with the victory, but the fight for seeding continues. The race for the No. 8 spot in the West -- and the safety net of having to win just one of two games to make the playoffs -- could come down to the regular seasons final day, when Memphis and Golden State meet. The good thing for the Grizzlies is they dont have to leave home until that matchup as they have games against Dallas and two against Sacramento before the finale.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="row h-100">
+                      <div class="col-12">
+                        <h5 class="fs-3 fs-lg-5 lh-sm text-uppercase">Our store</h5>
+                        <p class="my-4 pe-xl-5">Memphis clinched a spot in the play-in tournament with the victory, but the fight for seeding continues. The race for the No. 8 spot in the West -- and the safety net of having to win just one of two games to make the playoffs -- could come down to the regular seasons final day, when Memphis and Golden State meet. The good thing for the Grizzlies is they dont have to leave home until that matchup as they have games against Dallas and two against Sacramento before the finale.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="row h-100">
+                      <div class="col-12">
+                        <h5 class="fs-3 fs-lg-5 lh-sm text-uppercase">Our store</h5>
+                        <p class="my-4 pe-xl-5">Memphis clinched a spot in the play-in tournament with the victory, but the fight for seeding continues. The race for the No. 8 spot in the West -- and the safety net of having to win just one of two games to make the playoffs -- could come down to the regular seasons final day, when Memphis and Golden State meet. The good thing for the Grizzlies is they dont have to leave home until that matchup as they have games against Dallas and two against Sacramento before the finale.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="py-0 pb-6" id="collections">
+        <div class="container">
+          <div class="row h-100">
+            <div class="col-lg-7 mt-7">
+              <h5 class="fs-3 fs-lg-5 lh-sm mb-0 text-uppercase">Collections</h5>
+            </div>
+            <div class="col-12">
+              <nav>
+                <div class="nav nav-tabs watch-tabs mb-4 justify-content-end" id="nav-tab" role="tablist">
+                  <button class="nav-link active" id="nav-latest-tab" data-bs-toggle="tab" data-bs-target="#nav-latest" type="button" role="tab" aria-controls="nav-latest" aria-selected="true">LATEST </button>
+                  <button class="nav-link" id="nav-popular-tab" data-bs-toggle="tab" data-bs-target="#nav-popular" type="button" role="tab" aria-controls="nav-popular" aria-selected="false">POPULAR</button>
+                </div>
+              </nav>
+              <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-latest" role="tabpanel" aria-labelledby="nav-latest-tab">
+                  <div class="carousel slide" id="carouselLatest" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                      <div class="carousel-item active" data-bs-interval="10000">
+                        <div class="row h-100 align-items-center">
+                          <div class="col-sm-6 col-md-4 mb-3 mb-md-0">
+                            <div class="card bg-black text-white p-6 pb-8"><img class="card-img" src="../assets/watch-1.png" alt="..." />
+                              <div class="card-img-overlay bg-dark-gradient d-flex flex-column-reverse align-items-center">
+                                <h6 class="text-primary">$650.00</h6>
+                                <h4 class="text-light">ADRIATICA ADR</h4>
+                              </div><a class="stretched-link" href="#"></a>
+                            </div>
+                          </div>
+                          <div class="col-sm-6 col-md-4 mb-3 mb-md-0">
+                            <div class="card bg-black text-white p-6 pb-8"><img class="card-img" src="../assets/watch-2.png" alt="..." />
+                              <div class="card-img-overlay bg-dark-gradient d-flex flex-column-reverse align-items-center">
+                                <h6 class="text-primary">$126.00</h6>
+                                <h4 class="text-light">SEIKO SNZGO7K1</h4>
+                              </div><a class="stretched-link" href="#"></a>
+                            </div>
+                          </div>
+                          <div class="col-sm-6 col-md-4 mb-3 mb-md-0">
+                            <div class="card bg-black text-white p-6 pb-8"><img class="card-img" src="../assets/watch-3.png" alt="..." />
+                              <div class="card-img-overlay bg-dark-gradient d-flex flex-column-reverse align-items-center">
+                                <h6 class="text-primary">$250.00</h6>
+                                <h4 class="text-light">ROAMER RM 220837</h4>
+                              </div><a class="stretched-link" href="#"></a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>             
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ============================================-->
+
+      <!-- ============================================-->
+      <!-- <section> begin ============================-->
+      <section class="py-0 pt-7" id="contact">
+
+        <div class="container">
+          <div class="row">
+            <div class="col-6 col-sm-4 col-xl-3 mb-3">
+              <h4 class="lh-lg fw-bold text-light">WATCH</h4>
+            </div>
+            <div class="col-6 col-sm-4 col-xl-3 mb-3">
+              <h5 class="lh-lg fw-bold text-light">MENU</h5>
+              <ul class="list-unstyled mb-md-4 mb-lg-0">
+                <li class="lh-lg"><a class="text-800 text-decoration-none text-uppercase fw-bold" href="#!">Shipping Info</a></li>
+                <li class="lh-lg"><a class="text-800 text-decoration-none text-uppercase fw-bold" href="#!">Refunds</a></li>
+                <li class="lh-lg"><a class="text-800 text-decoration-none text-uppercase fw-bold" href="#!">How to Order</a></li>
+                <li class="lh-lg"><a class="text-800 text-decoration-none text-uppercase fw-bold" href="#!">How to Track</a></li>
+                <li class="lh-lg"><a class="text-800 text-decoration-none text-uppercase fw-bold" href="#!">Size Guides</a></li>
+              </ul>
+            </div>
+            <div class="col-6 col-sm-4 col-xl-3 mb-3">
+              <h5 class="mb-5"></h5>
+              <ul class="list-unstyled mb-md-4 mb-lg-0">
+                <li class="lh-lg"><a class="text-800 text-decoration-none text-uppercase fw-bold" href="#!">Contact Us</a></li>
+                <li class="lh-lg"><a class="text-800 text-decoration-none text-uppercase fw-bold" href="#!">my account</a></li>
+              </ul>
+            </div>
+            <div class="col-12 col-xl-3">
+              <h5 class="lh-lg fw-bold text-light text-uppercase">Signup For our Latest News</h5>
+              <div class="row input-group-icon mb-5">
+                <div class="col-12">
+                  <form class="row row-cols-lg-auto g-0 align-items-center">
+                    <div class="col-8 col-lg-9">
+                      <label class="visually-hidden" for="colFormLabel">Username</label>
+                      <div class="input-group">
+                        <input class="rounded-end-0 form-control" id="colFormLabel" type="email" placeholder="email address" />
+                      </div>
+                    </div>
+                    <div class="col-4 col-lg-3">
+                      <button class="btn btn-primary rounded-start-0" type="submit">Submit</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end of .container-->
+
+      </section>
+      <!-- <section> close ============================-->
+      <!-- ============================================-->
+
+
+    </main>
+    <!-- ===============================================-->
+    <!--    End of Main Content-->
+    <!-- ===============================================-->
 
 
 
 
-  
-	  <!-- Include jQuery, Popper.js, and Bootstrap JS -->
-	  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-	  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-	  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+    <!-- ===============================================-->
+    <!--    JavaScripts-->
+    <!-- ===============================================-->
+    <script src="../vendors/@popperjs/popper.min.js"></script>
+    <script src="../vendors/bootstrap/bootstrap.min.js"></script>
+    <script src="../vendors/is/is.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
+    <script src="../vendors/feather-icons/feather.min.js"></script>
+    <script>
+      feather.replace();
+    </script>
+    <script src="script.js"></script>
 
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;700&amp;display=swap" rel="stylesheet">
+  </body>
 
-
-  
-
-    <!-- Custom JS -->
-    <script src="../main/script.js"></script>
-</body>
 </html>

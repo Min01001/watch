@@ -13,14 +13,15 @@
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-    <link rel="stylesheet" href="../main/style.css">
+
+    <link rel="stylesheet" href="style.css">
 	
 
 </head>
-<body style="background-color: black;">
+<body>
 
 <?php
-include '../main/sidebar.php';
+include 'sidebar.php';
 include '../main/db_connect.php';
 
 // Fetch products (initial load)
@@ -29,9 +30,9 @@ $result = $conn->query($sql);
 ?>
 
 <!-- Search Bar -->
-<div class="container-fluid search-btn d-flex justify-content-center align-items-center">
+<div class="containersearch-btn d-flex justify-content-center align-items-center py-4">
     <form class="d-flex w-50" role="search" style="padding-top: 50px;" onsubmit="return false;">
-        <input id="search-input" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <input id="search-input" class="form-control me-2 text-dark" type="search" placeholder="Search" aria-label="Search">
         <!-- <button id="search-button" class="btn btn-outline-dark d-flex align-items-center" type="button">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="blue" class="bi bi-search" viewBox="0 0 16 16">
                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
@@ -42,7 +43,7 @@ $result = $conn->query($sql);
 </div>
 
 <!-- Product List -->
-<div class="container-fluid">
+<div class="container">
     <div class="row justify-content-center" id="product-list" style="padding-top: 60px;">
     <?php
         if ($result->num_rows > 0) {
@@ -64,7 +65,10 @@ $result = $conn->query($sql);
                 echo '            <p class="card-text text-center"><strong>' . number_format($product['price']) . ' KS</strong></p>';
                 echo '        </div>';
                 echo '        <div class="d-flex justify-content-center">';
-                
+                echo '            <form method="POST" onsubmit="return confirm(\'Are you sure you want to delete?\')" action="delete.php">';
+                echo '                <input type="hidden" name="id" value="' . $product['id'] . '">';
+                echo '                <button type="submit" class="btn btn-danger btn-sm">Delete</button>';
+                echo '            </form>';
                 echo '        </div>';
                 echo '    </div>';
                 echo '</div>';

@@ -17,7 +17,7 @@
 	<!-- Custom CSS -->
     <link rel="stylesheet" href="../main/style.css">
 </head>
-<body>
+<body style="background-color: black">
 
 <?php
 include 'sidebar.php';
