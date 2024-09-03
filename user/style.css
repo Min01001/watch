@@ -5306,7 +5306,7 @@ fieldset:disabled .btn {
 
 .img-center {
   width: 170px; /* Desired width */
-  height: 170px; /* Desired height */
+  height: cover; /* Desired height */
   object-fit: cover; /* Maintain aspect ratio and cover container */
   
 }
