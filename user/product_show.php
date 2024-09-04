@@ -21,7 +21,6 @@
 <body>
 
 <?php
-include 'sidebar.php';
 include '../main/db_connect.php';
 
 // Fetch products (initial load)
@@ -33,17 +32,11 @@ $result = $conn->query($sql);
 <div class="containersearch-btn d-flex justify-content-center align-items-center py-4">
     <form class="d-flex w-50" role="search" style="padding-top: 50px;" onsubmit="return false;">
         <input id="search-input" class="form-control me-2 text-dark" type="search" placeholder="Search" aria-label="Search">
-        <!-- <button id="search-button" class="btn btn-outline-dark d-flex align-items-center" type="button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="blue" class="bi bi-search" viewBox="0 0 16 16">
-                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-            </svg>
-            <span class="ms-2 text-dark">Search</span>
-        </button> -->
     </form>
 </div>
 
 <!-- Product List -->
-<div class="container">
+<!-- <div class="container"> -->
     <div class="row justify-content-center" id="product-list" style="padding-top: 60px;">
     <?php
         if ($result->num_rows > 0) {
@@ -78,7 +71,7 @@ $result = $conn->query($sql);
         }
         ?>
     </div>
-</div>
+<!-- </div> -->
 
 <?php
 $conn->close(); // Close the database connection

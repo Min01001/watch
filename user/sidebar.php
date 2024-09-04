@@ -1,12 +1,13 @@
 <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3 d-block" data-navbar-on-scroll="data-navbar-on-scroll">
-        <div class="container"><a class="navbar-brand d-inline-flex" href="index.html"><span class="text-light fs-2 fw-bold ms-2">Watch</span></a>
+        <div class="container"><a class="navbar-brand d-inline-flex" href="index.php"><span class="text-light fs-2 fw-bold ms-2">Watch</span></a>
           <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
           <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item px-2"><a class="nav-link fw-bold active" aria-current="page" href="index.php">WATCHES</a></li>
-              <li class="nav-item px-2"><a class="nav-link fw-bold" href="index.php#store">STORE</a></li>
-              <li class="nav-item px-2"><a class="nav-link fw-bold" href="index.php#contact">CONTACT</a></li>
-              <li class="nav-item px-2"><a class="nav-link fw-bold" href="product_show.php">PRODUCT</a></li>
+              <li class="nav-item px-2"><a class="nav-link fw-bold" href="#store">STORE</a></li>
+              <li class="nav-item px-2"><a class="nav-link fw-bold" href="#product">PRODUCT</a></li>
+              <li class="nav-item px-2"><a class="nav-link fw-bold" href="#contact">CONTACT</a></li>
+              
             </ul>
             <form class="d-flex"><a class="text-primary" href="#!">
                 <svg class="feather feather-phone-call" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

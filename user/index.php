@@ -59,7 +59,7 @@
       <section class="bg-black py-8 pt-0" id="store">
         <div class="bg-holder" style="background-image:url(../assets/store-bg.png);background-position:left bottom;background-size:contain;">
         </div>
-        <!--/.bg-holder-->
+       
 
         <div class="container-lg">
           <div class="row flex-center">
@@ -98,49 +98,25 @@
           </div>
         </div>
       </section>
-      <section class="py-0 pb-6" id="collections">
+
+
+      <section class="py-0 pb-6" id="product">
         <div class="container">
           <div class="row h-100">
             <div class="col-lg-7 mt-7">
               <h5 class="fs-3 fs-lg-5 lh-sm mb-0 text-uppercase">Collections</h5>
             </div>
             <div class="col-12">
-              <nav>
-                <div class="nav nav-tabs watch-tabs mb-4 justify-content-end" id="nav-tab" role="tablist">
-                  <button class="nav-link active" id="nav-latest-tab" data-bs-toggle="tab" data-bs-target="#nav-latest" type="button" role="tab" aria-controls="nav-latest" aria-selected="true">LATEST </button>
-                  <button class="nav-link" id="nav-popular-tab" data-bs-toggle="tab" data-bs-target="#nav-popular" type="button" role="tab" aria-controls="nav-popular" aria-selected="false">POPULAR</button>
-                </div>
-              </nav>
               <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="nav-latest" role="tabpanel" aria-labelledby="nav-latest-tab">
                   <div class="carousel slide" id="carouselLatest" data-bs-ride="carousel">
                     <div class="carousel-inner">
                       <div class="carousel-item active" data-bs-interval="10000">
-                        <div class="row h-100 align-items-center">
-                          <div class="col-sm-6 col-md-4 mb-3 mb-md-0">
-                            <div class="card bg-black text-white p-6 pb-8"><img class="card-img" src="../assets/watch-1.png" alt="..." />
-                              <div class="card-img-overlay bg-dark-gradient d-flex flex-column-reverse align-items-center">
-                                <h6 class="text-primary">700000.00KS</h6>
-                                <h4 class="text-light">ADRIATICA ADR</h4>
-                              </div><a class="stretched-link" href="#"></a>
-                            </div>
-                          </div>
-                          <div class="col-sm-6 col-md-4 mb-3 mb-md-0">
-                            <div class="card bg-black text-white p-6 pb-8"><img class="card-img" src="../assets/watch-2.png" alt="..." />
-                              <div class="card-img-overlay bg-dark-gradient d-flex flex-column-reverse align-items-center">
-                                <h6 class="text-primary">550000.00KS</h6>
-                                <h4 class="text-light">SEIKO SNZGO7K1</h4>
-                              </div><a class="stretched-link" href="#"></a>
-                            </div>
-                          </div>
-                          <div class="col-sm-6 col-md-4 mb-3 mb-md-0">
-                            <div class="card bg-black text-white p-6 pb-8"><img class="card-img" src="../assets/watch-3.png" alt="..." />
-                              <div class="card-img-overlay bg-dark-gradient d-flex flex-column-reverse align-items-center">
-                                <h6 class="text-primary">500000.00KS</h6>
-                                <h4 class="text-light">ROAMER RM 220837</h4>
-                              </div><a class="stretched-link" href="#"></a>
-                            </div>
-                          </div>
+                        <div class="row h-100 align-items-center justify-content-center">
+
+                          <?php include 'product.php'; ?>
+
+                          
                         </div>
                       </div>             
                     </div>
